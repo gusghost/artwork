@@ -12,6 +12,7 @@ import random
 image_list = []
 label_list = []
 epoch_num = 200
+list_idx = 0
 # ./data/train 以下のorange,appleディレクトリ以下の画像を読み込む。
 for dir in os.listdir("X:/library/document/卒業制作/first_prototype01/test"):
     if dir == ".DS_Store":
@@ -53,10 +54,11 @@ for dir in os.listdir("X:/library/document/卒業制作/first_prototype01/test")
             image_list.append(image / 255.)
             # print(image_list)
             # print(image_shape)
+            list_idx +=1
 
 # kerasに渡すためにnumpy配列に変換。
 image_list = np.array(image_list)
-image_list = np.reshape(image_list, (16650, 784))
+image_list = np.reshape(image_list, (list_idx, 784))
 # , 16650
 # print(image_list)
 # ラベルの配列を1と0からなるラベル配列に変更
@@ -66,12 +68,12 @@ Y = to_categorical(label_list)
 model = Sequential()
 # input_dimは次元の数らしい。denseとinputの数は最初に設定した次元の数と一致している必要がある
 model.add(Dense(784, input_dim=784))
-model.add(Activation("relu"))
-# model.add(Dropout(0.2))
+model.add(Activation("sigmoid"))
+model.add(Dropout(0.2))
 
 model.add(Dense(256))
-model.add(Activation("relu"))
-# model.add(Dropout(0.2))
+model.add(Activation("sigmoid"))
+model.add(Dropout(0.2))
 
 model.add(Dense(4))
 model.add(Activation("softmax"))
