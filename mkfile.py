@@ -40,7 +40,7 @@ for dir in os.listdir("X:/library/document/卒業制作/first_prototype01/test")
             # [R,G,B]はそれぞれが0-255の配列。
             image = np.array(Image.open(filepath))
             print(filepath)
-
+            print(image)
             # image = image.transpose(2, 0, 1)
 
             # これ白黒画像だからか１ピクセルにつき一つの数値ですね
@@ -48,6 +48,7 @@ for dir in os.listdir("X:/library/document/卒業制作/first_prototype01/test")
             # tate to yoko tekina
             random.shuffle(image)
             image = np.reshape(image, (1, 784))
+
             # [[number1,n2, n3, ..., nn]]
             # print(image)
             # 出来上がった配列をimage_listに追加。
@@ -70,7 +71,6 @@ model = Sequential()
 model.add(Dense(784, input_dim=784))
 model.add(Activation("sigmoid"))
 model.add(Dropout(0.2))
-
 model.add(Dense(256))
 model.add(Activation("sigmoid"))
 model.add(Dropout(0.2))

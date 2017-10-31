@@ -15,6 +15,5 @@ real = (np.sum(test, axis=1) > 2.5) * 1
 print(sum(predict == real) / 200.0)
 
 for i in data:
-    if sum((predict == real)/200.) == True
-        rue :
+    if sum((predict == real)/200.) == True:
         print(data[i])
