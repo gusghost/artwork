@@ -11,7 +11,7 @@ import random
 # 学習用のデータを作る.
 image_list = []
 label_list = []
-epoch_num = 200
+epoch_num = 20
 list_idx = 0
 # ./data/train 以下のorange,appleディレクトリ以下の画像を読み込む。
 for dir in os.listdir("X:/library/document/卒業制作/first_prototype01/test"):
@@ -40,12 +40,10 @@ for dir in os.listdir("X:/library/document/卒業制作/first_prototype01/test")
             # [R,G,B]はそれぞれが0-255の配列。
             image = np.array(Image.open(filepath))
             print(filepath)
-            print(image)
+            # print(image)
             # image = image.transpose(2, 0, 1)
-
             # これ白黒画像だからか１ピクセルにつき一つの数値ですね
             # image = image.reshape(1, image.shape[0] * image.shape[1] * image.shape[2]).astype("float32")[0]
-            # tate to yoko tekina
             random.shuffle(image)
             image = np.reshape(image, (1, 784))
 
