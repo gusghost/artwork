@@ -8,10 +8,12 @@ from PIL import Image
 import os
 import random
 
+# from compiler.ast import flatten
+
 # 学習用のデータを作る.
 image_list = []
 label_list = []
-epoch_num = 20
+epoch_num = 50
 list_idx = 0
 # ./data/train 以下のorange,appleディレクトリ以下の画像を読み込む。
 for dir in os.listdir("X:/library/document/卒業制作/first_prototype01/test"):
@@ -40,21 +42,35 @@ for dir in os.listdir("X:/library/document/卒業制作/first_prototype01/test")
             # [R,G,B]はそれぞれが0-255の配列。
             image = np.array(Image.open(filepath))
             print(filepath)
-            # print(image)
+
             # image = image.transpose(2, 0, 1)
             # これ白黒画像だからか１ピクセルにつき一つの数値ですね
-            # image = image.reshape(1, image.shape[0] * image.shape[1] * image.shape[2]).astype("float32")[0]
-            random.shuffle(image)
-            image = np.reshape(image, (1, 784))
+            # image = image.reshape(1, image.shape(0) * image.shape(1) * image.shape(2)).astype("float32")[0]
+            # random.shuffle(image)
+            # ソニーのソフトで作った画像と、直接prcで書き出した画像ではカラースケールが違うらしい。
+            # 配列を3分の１に圧縮したい
 
+            # length = 0
+            # for x in image:
+            #     length += len(x)
+            #     print(length)
+            # print(size(image))
+            # image = image.flatten()
+            # rint(image)
+            # if length == 2352:
+            #    print(image)
+            # np.reshape
+
+
+            # 3分の一に切り落としたい
             # [[number1,n2, n3, ..., nn]]
-            # print(image)
+
             # 出来上がった配列をimage_listに追加。
             image_list.append(image / 255.)
-            # print(image_list)
-            # print(image_shape)
-            list_idx +=1
 
+            list_idx += 1
+
+print(image_list)
 # kerasに渡すためにnumpy配列に変換。
 image_list = np.array(image_list)
 image_list = np.reshape(image_list, (list_idx, 784))
@@ -87,11 +103,11 @@ model.fit(image_list, Y, epochs=epoch_num, batch_size=100, validation_split=0.1)
 total = 0.
 ok_count = 0.
 
-for dir in os.listdir("X:/library/document/卒業制作/first_prototype01/test"):
+for dir in os.listdir("X:/library/document/卒業制作/first_prototype01/train"):
     if dir == ".DS_Store":
         continue  # continue is nani
 
-    dir1 = "X:/library/document/卒業制作/first_prototype01/test/" + dir
+    dir1 = "X:/library/document/卒業制作/first_prototype01/train/" + dir
     label = 0
 
     if dir == "maru_b":  # appleはラベル0
