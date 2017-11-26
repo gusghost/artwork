@@ -1,13 +1,12 @@
 # import keras
 import numpy as np
+import tensorflow as tf
+import tensorboard
+import os
 
-ar = np.arange(12)
-vr = np.arange(32)
-print(ar)
-
-b = np.reshape(ar,(3, 4))
-
-print(b)
-
-c = np.reshape(b,(1,12))
-print(c)
+tens2 = tf.ones(4)
+tens = tf.ones((5, 4))
+tensz = tf.zeros((2,4))
+tens3 = tf.
+# tf.train.shuffle_batch()
+print(tensz)
